@@ -1,2 +1,2 @@
 #!/bin/bash
-env
+set -o posix; set | grep -Ev '(SHELLOPTS|BASHOPTS|HISTFILE|HOME|PWD|_(..))$'
