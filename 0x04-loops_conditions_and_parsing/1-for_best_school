@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# This script displays "Best School" 10 times
+#using a while loop to print Best school 10 times
+#after shellcheck is used you should get no err
 
 var="Best School"
 i="0"
