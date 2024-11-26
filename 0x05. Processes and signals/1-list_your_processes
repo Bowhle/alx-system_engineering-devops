@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# A Bash script that displays a list of currently running processes
+# Requirements:
+# - Must show all processes, for all users, including those without a TTY
+# - Display in a user-oriented format
+# - Show process hierarchy
+
+ps -eo user,pid,ppid,%cpu,%mem,tty,stat,start,time,cmd --forest

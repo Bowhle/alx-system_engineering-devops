@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# This script displays "Best School" 10 times
+#using a while loop to print Best school 10 times
+#after shellcheck is used you should get no err
 
-for i in {1..10}
-do
-    echo "Best School"
+var="Best School"
+i="0"
+while [ $i -lt 10 ]; do
+	echo "$var"
+	((i++))
 done
