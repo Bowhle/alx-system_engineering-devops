@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# A Bash script that stops the
-# "4-to_infinity_and_beyond" process indirectly.
-
-# Find the PID of the process by searching for the name
-pkill -f 4-to_infinity_and_beyond
