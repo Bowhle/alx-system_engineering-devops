@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script displays listening TCP/UDP sockets with
+# their corresponding PID and program name
+
+netstat -l -p
