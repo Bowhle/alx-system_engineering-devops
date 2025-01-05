@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # a demon process
-# Bash (init) script 101-manage_my_process that manages manage_my_process.
+# Bash (init) script 101-manage_my_process
+# that manages manage_my_process.
 # (both files need to be pushed to git)
 
 if [ "$1" == "start" ]; then
