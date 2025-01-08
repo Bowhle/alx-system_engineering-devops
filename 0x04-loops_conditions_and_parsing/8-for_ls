@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# A script that displays:
+# - The content of the current directory
+# - In a list format
+# - Only the part of the name after the first dash
+# - Hidden files are excluded
+
+for file in *; do
+  if [[ "$file" != *-* ]]; then
+    echo "$file"
+  else
+    echo "${file#*-}"
+  fi
+done
