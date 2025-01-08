@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# A script that loops from 1 to 10
+# Displays "bad luck" for the 4th loop iteration
+# Displays "good luck" for the 8th loop iteration
+# Displays "Best School" for the other iterations
+
+var1="Best School"
+var2="bad luck"
+var3="good luck"
+i=1
+
+while [ "$i" -le 10 ]; do
+    if [ "$i" -eq 4 ]; then
+        echo "$var2"
+    elif [ "$i" -eq 8 ]; then
+        echo "$var3"
+    else
+        echo "$var1"
+    fi
+    ((i++))
+done
