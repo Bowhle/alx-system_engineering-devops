@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-# a Bash script that displays the content of the file /etc/passwd,
-# using the while loop + IFS.
+# A script that tells the story of the users from /etc/passwd
 
-while IFS=':' read -r f1 f2 f3 f4 f5 f6 f7; do
-	echo "The user $f1 is part of the $f4 gang, lives in $f6 and rides $f7. $f3's place is protected by the passcode $f2, more info about the user here: $f5"
-done < "/etc/passwd"
+# Define the IFS to split by colon
+IFS=":"
+
+# Read each line from /etc/passwd
+while read -r username password user_id group_id user_info home_directory shell; do
+  # Print the formatted output
+  echo "The user $username is part of the $group_id gang, lives in $home_directory and rides $shell. $user_id's place is protected by the passcode $password, more info about the user here: $user_info"
+done < /etc/passwd

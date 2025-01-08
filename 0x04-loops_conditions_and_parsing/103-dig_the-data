@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
-# accessing a log file as done in 102
-# get how many many occurances the ip occurs
-# awk must be used and then loops should not be used
+#!/bin/bash
 
-awk '{print $1 " " $9}' apache-access.log | sort | uniq -c | sort -rn
+# Parse the log file and group by IP and HTTP code, then count occurrences
+awk '{print $1, $9}' apache-access.log |
+  sort |
+  uniq -c |
+  sort -nr |
+  awk '{print $1, $2, $3}'
