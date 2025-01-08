@@ -8,7 +8,7 @@ while [ $i -lt 10 ]; do
 	echo "$var"
 
 	if [ $i -eq 9 ]; then
-	echo "Hi"
+	    echo "Hi"
 	fi
 
 	i=$((i + 1))
