@@ -2,9 +2,9 @@
 # A script using a while loop to print Best School 10 times
 
 var="Best School"
-i="0"
+i=0
 
-while [ $i -le 10 ]; do
+while [ $i -lt 10 ]; do
 	echo "$var"
 	i=$((i + 1))
 done
