@@ -7,11 +7,10 @@ hour=0
 minute=1
 
 while [ "$hour" -le 12 ]; do
-  echo "hour: $hour"
-  minute=1
-  # shellcheck disable=SC2170
-  while [ "minute" -le 59 ]; do
-    echo "minute"
+  echo "$hour:" "$hour"
+  minute="1"
+  while [ "$minute" -le 59 ]; do
+    echo "$minute"
     ((minute++))
   done
   ((hour++))
