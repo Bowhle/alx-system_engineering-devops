@@ -4,11 +4,11 @@
 var="Best School"
 i=0
 
-while [ $i -lt 10 ]; do
+while [ "$i" -lt 10 ]; do
 	echo "$var"
 
-	if [ $i -eq 9 ]; then
-	    echo "Hi"
+	if [ "$i" -eq 9 ]; then
+	echo "Hi"
 	fi
 
 	i=$((i + 1))
