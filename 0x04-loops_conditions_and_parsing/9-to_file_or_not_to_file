@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# A script that provides information about the "school" file.
+
+var1="school file exists"
+var2="school file does not exist"
+var3="school file is empty"
+var4="school file is not empty"
+var5="school is a regular file"
+
+if [ -e "school" ]; then
+  echo "$var1"
+
+  if [ ! -s "school" ]; then
+    echo "$var3"
+  else
+    echo "$var4"
+  fi
+
+  if [ -f "school" ]; then
+  echo "$var5"
+  fi
+
+else
+  echo "$var2"
+fi
