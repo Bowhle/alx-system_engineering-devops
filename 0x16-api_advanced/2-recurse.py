@@ -1,31 +1,15 @@
 #!/usr/bin/python3
-
-"""A function that queries the Reddit API and returns
-   a list containing the titles of all hot articles for
-   a given subreddit."""
-
 import requests
 
 
-def recurse(subreddit, hot_list=[], after="", count=0):
-    """
-    Recursively retrieves a list of titles of all hot posts
-    on a subreddit.
+def recurse(subreddit, hot_list=None, after="", count=0):
+    if hot_list is None:
+        hot_list = []
 
-    Args:
-        subreddit (str): The name of the subreddit.
-        hot_list (list, optional): List to store the post titles.
-                                    Default is an empty list.
-    Returns:
-        list: A list of post titles from the hot section of the subreddit.
-    """
-
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-
+    url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/your_username)"
     }
-
     params = {
         "after": after,
         "count": count,
