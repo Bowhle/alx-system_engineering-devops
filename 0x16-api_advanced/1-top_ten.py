@@ -5,7 +5,7 @@ import requests
 
 
 def top_ten(subreddit):
-    """ print top 10 hot post for a given subredit"""
+    """ print top 10 hot post for a given subreddit"""
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     headers = {'User-Agents': 'api/advanced, task1'}
     params = {"limit": 10}
