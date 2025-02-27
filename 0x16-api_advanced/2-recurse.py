@@ -6,23 +6,24 @@ import requests
 
 def recurse(subreddit, hot_list=None):
     if hot_list is None:
-        hot_list = []
+        hdef recurse(subreddit, hot_list=[], after=""):
+    """Queries"""
+    req = requests.get(
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={"User-Agent": "Custom"},
+        params={"after": after},
+    )
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {'User-Agent': 'api/advanced, task1'}
-    params = {"limit": 100}
+    if req.status_code == 200:
+        for get_data in req.json().get("data").get("children"):
+            dat = get_data.get("data")
+            title = dat.get("title")
+            hot_list.append(title)
+        after = req.json().get("data").get("after")
 
-    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
-
-    if response.status_code == 200:
-        data = response.json()
-        children = data.get("data", {}).get("children", [])
-        hot_list.extend([post["data"]["title"] for post in children])
-
-        after = data.get("data", {}).get("after")
-        if after:
-            params['after'] = after
-            return recurse(subreddit, hot_list)
-
-        return hot_list
-    return None
+        if after is None:
+            return hot_list
+        else:
+            return recurse(subreddit, hot_list, after)
+    else:
+        return None
