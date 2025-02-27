@@ -6,8 +6,10 @@ import requests
 
 def recurse(subreddit, hot_list=None):
     if hot_list is None:
-        hdef recurse(subreddit, hot_list=[], after=""):
-    """Queries"""
+        def recurse(subreddit, hot_list=[], after=""):
+    """
+    Queries
+    """
     req = requests.get(
         "https://www.reddit.com/r/{}/hot.json".format(subreddit),
         headers={"User-Agent": "Custom"},
