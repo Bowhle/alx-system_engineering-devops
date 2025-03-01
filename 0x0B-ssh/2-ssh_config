@@ -1,0 +1,6 @@
+# SSH configuration for using the private key ~/.ssh/school
+
+Host *
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
+
