@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# This script transfers a file to a remote server using scp with SSH private key authentication.
+# a Bash script that transfers a file from our client to a server
 
 if [ $# -lt 4 ]; then
-    echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
-    exit 1
+	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+	exit 1
 fi
 
-FILE=$1
-IP=$2
-USERNAME=$3
-SSH_KEY=$4
+path_2_file=$1
+server_ip=$2
+username=$3
+ssh_key=$4
 
-scp -i "$SSH_KEY" -o StrictHostKeyChecking=no "$FILE" "$USERNAME@$IP:~/"
+scp -o StrictHostKeyChecking=no -i "$ssh_key" "$path_2_file" "$username"@"$server_ip":~/
 
