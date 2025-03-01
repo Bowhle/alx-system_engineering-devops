@@ -2,16 +2,8 @@
 # This script installs Nginx and serves a "Hello World!" page
 
 apt-get update -y
-apt-get install -y nginx
-
-echo "Hello World!" > /var/www/html/index.html
-
-sed -i 's|# listen 80 default_server;|listen 80 default_server;|' \
-    /etc/nginx/sites-available/default
-sed -i 's|# listen \[::\]:80 default_server;|listen [::]:80 default_server;|' \
-    /etc/nginx/sites-available/default
-
-nginx -s reload
-
-curl localhost
+apt-get install nginx -y
+sudo ufw allow 'Nginx HTTP'
+sh -c 'echo "Hello World!" > /var/www/html/index.html' 
+service nginx restart
 
