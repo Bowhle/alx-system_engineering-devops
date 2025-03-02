@@ -47,6 +47,10 @@ While the issue remains ongoing, it can likely be resolved by modifying the perm
 4. **Update configuration management** tools (e.g., Puppet) to ensure that `strace` is correctly configured and that permissions are set during server provisioning.
 
 ---
+## System Monitoring Tools
+
+Below is a diagram that provides an overview of Linux system performance monitoring and debugging tools, which can help in diagnosing similar issues in the future:
+![System Monitoring Tools](adminstoolbox-Strace-Debugging.png)
 
 ## **Conclusion**
 The inability to debug Apache2 using `strace` has prevented effective troubleshooting, but it appears that the issue is related to permissions and configuration. Resolving this requires ensuring that `strace` has the necessary privileges to access Apache2 processes, which can be accomplished by running `strace` with elevated privileges or adjusting security settings. Further investigation is necessary, but the corrective actions outlined above should prevent similar issues in the future.
