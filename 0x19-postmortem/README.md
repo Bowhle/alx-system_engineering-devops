@@ -1,5 +1,7 @@
 # 0x19 Postmortem: Strace Debugging Issue on Web Server
 
+![Strace Debugging](https://miro.medium.com/v2/resize:fit:640/format:webp/1*3k3lSwb-QP-x9h0w28OIuQ.jpeg)
+
 ## **Issue Summary**
 This postmortem outlines an issue I faced while trying to debug the Apache2 web server using `strace`. Despite several attempts to configure and run `strace` on Apache2 processes, it was unable to trace system calls, leading to challenges in diagnosing server issues. The problem was detected at 5:30 PM (SAST), and as of now, it remains unresolved. Additional troubleshooting steps are outlined below.
 
