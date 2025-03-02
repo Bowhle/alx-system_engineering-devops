@@ -1,10 +1,10 @@
 # 0x19 Postmortem: Strace Debugging Issue on Web Server
 
 ## **Issue Summary**
-This postmortem outlines an issue I faced while trying to debug the Apache2 web server using `strace`. Despite several attempts to configure and run `strace` on Apache2 processes, it was unable to trace system calls, leading to challenges in diagnosing server issues. The problem was detected at 5:30 PM UTC, and as of now, it remains unresolved. Additional troubleshooting steps are outlined below.
+This postmortem outlines an issue I faced while trying to debug the Apache2 web server using `strace`. Despite several attempts to configure and run `strace` on Apache2 processes, it was unable to trace system calls, leading to challenges in diagnosing server issues. The problem was detected at 5:30 PM (SAST), and as of now, it remains unresolved. Additional troubleshooting steps are outlined below.
 
 ### **Duration of the Outage**
-- **Start Time**: 5:30 PM UTC
+- **Start Time**: 5:30 PM (SAST)
 - **End Time**: Ongoing (issue unresolved as of the last update)
 - **Impact**: The inability to use `strace` on Apache2 processes has severely hindered server-side diagnostics. This has impacted all users relying on the server, as proper debugging could not be performed. The issue prevents deeper analysis of server behavior.
 
@@ -14,13 +14,13 @@ This postmortem outlines an issue I faced while trying to debug the Apache2 web 
 ---
 
 ## **Timeline**
-- **5:30 PM UTC**: The issue was first detected when attempting to run `strace` on Apache2 processes. No useful output was generated.
-- **5:35 PM UTC**: Initial investigation began, using commands like `grep apache2` and `curl -sl localhost` to check if the server was running. These commands showed that the server was functioning, but `strace` failed to produce any meaningful information.
-- **5:50 PM UTC**: Checked the installation status of `strace` using `dpkg -s strace` to confirm that it was correctly installed.
-- **6:00 PM UTC**: Assumed that `strace` might be missing the necessary permissions to attach to Apache2 processes. Began investigating Apache2’s running processes to identify any discrepancies.
-- **6:30 PM UTC**: Realized that `strace` likely needed elevated privileges (using `sudo` or running as root) to trace Apache2, as it was running under a non-privileged user.
-- **7:00 PM UTC**: Consulted official documentation and community discussions to better understand the specific permissions and configuration requirements for running `strace` with Apache2 processes.
-- **7:30 PM UTC**: As of this writing, the issue remains unresolved. However, recommendations for fixing the issue have been identified, including the need for elevated permissions.
+- **5:30 PM (SAST)**: The issue was first detected when attempting to run `strace` on Apache2 processes. No useful output was generated.
+- **5:35 PM (SAST)**: Initial investigation began, using commands like `grep apache2` and `curl -sl localhost` to check if the server was running. These commands showed that the server was functioning, but `strace` failed to produce any meaningful information.
+- **5:50 PM (SAST)**: Checked the installation status of `strace` using `dpkg -s strace` to confirm that it was correctly installed.
+- **6:00 PM (SAST)**: Assumed that `strace` might be missing the necessary permissions to attach to Apache2 processes. Began investigating Apache2’s running processes to identify any discrepancies.
+- **6:30 PM (SAST)**: Realized that `strace` likely needed elevated privileges (using `sudo` or running as root) to trace Apache2, as it was running under a non-privileged user.
+- **7:00 PM (SAST)**: Consulted official documentation and community discussions to better understand the specific permissions and configuration requirements for running `strace` with Apache2 processes.
+- **7:30 PM (SAST)**: As of this writing, the issue remains unresolved. However, recommendations for fixing the issue have been identified, including the need for elevated permissions.
 
 ---
 
