@@ -1,18 +1,9 @@
 #!/usr/bin/env bash
 # This script installs Nginx and serves a "Hello World!" page
+# Installing nginx on the web-01
 
-# Update package list and install Nginx
 apt-get update -y
 apt-get install nginx -y
-
-# Allow Nginx HTTP traffic through the firewall
-ufw allow 'Nginx HTTP'
-
-# Create a "Hello World!" page
-echo "Hello World!" > /var/www/html/index.html
-
-# Reload Nginx to apply changes without using systemctl
-kill -HUP $(cat /var/run/nginx.pid)
-
-# Output success message
-echo "Nginx has been installed and is serving 'Hello World!'"
+sudo ufw allow 'Nginx HTTP'
+sh -c 'echo "Hello World!" > /var/www/html/index.html'
+service nginx restart
