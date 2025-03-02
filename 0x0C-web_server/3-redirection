@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Configures a new Ubuntu machine by installing
+# Nginx, where it should be listening on port 80.
+# Serve a page that returns a "Hello World" string.
+# Set up a redirection for /redirect_me to YouTube with a 301 status.
+
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && \
+         sudo apt-get install nginx -y
+
+echo -e "\nSetting up some minor stuff.\n"
+
+# Starting Nginx service
+sudo service nginx start
+
+# Allowing Nginx through the firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Giving the user ownership of website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# Backing up the default index file
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# Creating a new index.html file with a "Hello World!" message
+echo -e "Hello World!" > /var/www/html/index.html
+
+# Configuring /redirect_me to redirect to a YouTube video with a 301 status
+sudo sed -i '/location \/ {/a \
+    location /redirect_me {\
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\
+    }' /etc/nginx/sites-available/default
+
+# Restarting Nginx to apply the changes
+sudo service nginx restart
+
+echo -e "\nCompleted. ✅ Nginx is running and redirecting /redirect_me.\n"
