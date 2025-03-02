@@ -8,23 +8,23 @@ sudo apt-get update -y -qq && \
 
 echo -e "\nSetting up some minor stuff.\n"
 
-# starting nginx service
+# Start Nginx service (no need for restart right away)
 sudo service nginx start
 
-# allowing nginx on firewall
+# Allow Nginx through firewall
 sudo ufw allow 'Nginx HTTP'
 
-# Give the user ownership to website files for easy editing
+# Give the user ownership to website files for easy editing (optional step)
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
-# Backup default index
+# Backup the default index file
 cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
 
-# Creating new index
-echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+# Create the new "Hello World!" page
+echo "Hello World!" > /var/www/html/index.html
 
-# Restarting nginx
-sudo service nginx restart
+# Reload Nginx (without using systemctl or service restart)
+kill -HUP $(cat /var/run/nginx.pid)
 
-echo -e "\nCompleted. ✅\n"
+echo -e "\nCompleted. ✅ Nginx is running and serving 'Hello World!'.\n"
