@@ -1,39 +1,15 @@
 #!/usr/bin/env bash
-# Configures a new Ubuntu machine by installing Nginx
-# - Listens on port 80
-# - Serves a "Hello World!" page
-# - Redirects /redirect_me to a YouTube video
+# Configures Nginx to redirect /redirect_me to a YouTube video
 
-set -e  # Exit immediately if a command exits with a non-zero status
+set -e  # Exit script if any command fails
 
-echo -e "Updating and installing Nginx...\n"
-sudo apt-get update -y -qq && sudo apt-get install -y nginx
+echo -e "\nSetting up 301 redirection for /redirect_me...\n"
 
-echo -e "\nSetting up Nginx and firewall rules...\n"
-
-# Start Nginx service
-sudo service nginx start
-
-# Allow HTTP traffic through the firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Assign ownership to the user for easy editing
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chmod -R 755 /var/www
-
-# Backup the default index file
-if [ -f /var/www/html/index.nginx-debian.html ]; then
-	sudo cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
-fi
-
-# Create a new index page
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
-
-# Configure Nginx redirection
-REDIRECT_CONFIG="location /redirect_me {\n\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n}"
-sudo sed -i "/server_name _;/a\\$REDIRECT_CONFIG" /etc/nginx/sites-available/default
+# Insert redirection rule in the server block
+REDIRECT_RULE="location /redirect_me {\n\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n}"
+sudo sed -i "/server_name _;/a\\$REDIRECT_RULE" /etc/nginx/sites-available/default
 
 # Restart Nginx to apply changes
 sudo service nginx restart
 
-echo -e "\n✅ Setup complete! Nginx is running and serving your page.\n"
+echo -e "\n✅ Redirection setup complete! /redirect_me now redirects permanently.\n"
