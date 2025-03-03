@@ -1,11 +1,11 @@
-# A puppet script that fixes a WordPress site 500 error to 200 OK
+# Ensures that wp-settings.php exists before modifying it
 file { '/var/www/html/wp-settings.php':
-  ensure  => 'file',
-  before  => Exec['fix-wordpress'],  # Ensures file is created before exec runs
+  ensure => 'file',
+  before => Exec['fix-wordpress'], # Ensures file is created before exec runs
 }
 
 # Runs sed to fix incorrect 'phpp' extensions
 exec { 'fix-wordpress':
   command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
-  path    => ['/usr/bin', '/bin'],
+  path    => ['/usr/local/bin', '/bin'],
 }
