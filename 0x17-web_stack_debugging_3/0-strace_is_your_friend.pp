@@ -1,12 +1,11 @@
-# Fixes bad `phpp` extensions to `php` in the WordPress file `wp-settings.php`
-# Ensures that the file exists before running the sed command.
-
+# Ensures that wp-settings.php exists before modifying it
 file { '/var/www/html/wp-settings.php':
   ensure => 'file',
+  before => Exec['fix-wordpress'], # Ensures file is created before exec runs
 }
 
+# Runs sed to fix incorrect 'phpp' extensions
 exec { 'fix-wordpress':
   command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
-  path    => '/usr/local/bin/:/bin/',
-  onlyif  => 'test -f /var/www/html/wp-settings.php', # Ensure the file exists before running sed
+  path    => ['/usr/local/bin', '/bin'],
 }
